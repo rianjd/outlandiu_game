@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #130d0a;
+    color: white;
+}
+.title{
+    top: 100px;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+h1{
+    height: max-content;
+
+    list-style:none!important;
+    font-family: 'MedievalSharp';
+    font-size: 80px;
+    color: #fff6e8b3;
+    text-shadow: 1px 2px 15px #585858;
+    text-align: center;
+    line-height: 2.5em;
+    transition: .1s ease all;
+}
+span{
+    height: max-content;
+    font-size: 30px;
+    list-style:none!important;
+    font-family: 'MedievalSharp';
+    color: #525252b3;
+    text-shadow: 1px 2px 15px #585858;
+    text-align: center;
+    line-height: 2.5em;
+    transition: .1s ease all;
+
+}
+#hero {
+    height: 1000px;
+    overflow: hidden;
+    position: relative;
+}
+.layer {
+    background-position: bottom center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 1000px;
+    position: fixed;
+    z-index: -1;
+}
+.layer-bg {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_bg.jpg");
+}
+.layer-01 {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_03.png");
+    background-position: left bottom;
+}
+.layer-02 {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_02.png");
+}
+.layer-03 {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_man.png");
+    background-position: right bottom;
+}
+.layer-04 {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_01.png");
+}
+.layer-overlay {
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/ilu_overlay.png");
+}
+
+
+#hero-mobile {
+display: none;
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/full_illustration.png") no-repeat center bottom / cover;
+    height: 320px;
+}
+@media all and (max-width: 640px) {
+#hero {
+    display: none;
+}
+#hero-mobile {
+    display: block;
+}
+}
+.content{
+    background-image: linear-gradient(to bottom, #130d0a, #3b3b3b);
+    margin: 0 auto;
+    padding: 200px;
+    z-index: 10;
+}
+p {
+    color: #ede0d5;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 18px;
+    line-height: 150%;
+    margin: 40px 0px;
+}
+h2{
+    font-family: 'Libre Baskerville', serif;
+}
+
+.to-bottom{
+    position: relative;
+    top: 10px;
+    animation: toBot 1.4s infinite;
+    -webkit-animation: toBot 1.4s infinite;
+}
+
+@keyframes toBot {
+    0% {opacity: 0; top: 0;}
+    40%{opacity: 1;}
+    90%{top: 10px;}
+    100%{opacity: 0; top: 20px;}
+}
+
+.hidden-item{
+    opacity: 0 !important;
+    width: 100%;
+    height: auto;
+    display: flex;
+    transition: .5s ease-in-out;
+}
+
+.item-scroll{
+    display: flex;
+    transition: .5s ease-in-out;
+    bottom: -100px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+}
+.item-scroll span{
+    font-size: 18px !important;
+
+}
+.btn{
+    border-radius: 20px;
+    background: #070814;
+    color: rgb(247, 253, 255);
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 2em;
+}
+.btn:hover{
+    background: rgb(214, 214, 214);
+    color: rgb(36, 36, 36);
+
+}
+img{
+    float: right;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px #060606;
+}
