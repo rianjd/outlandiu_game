@@ -111,6 +111,11 @@ export default class Fireball extends Phaser.Physics.Arcade.Sprite {
                 this.handleCollisionWithEnemy(enemy);
             }
         });
+        this.scene.boss.getChildren().forEach((boss) => {
+            if (this.scene.physics.overlap(this, boss) && !boss.enemyNoc) {
+                this.handleCollisionWithEnemy(boss);
+            }
+        });
     }
 
     handleCollisionWithEnemy(enemy) {

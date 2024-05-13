@@ -340,6 +340,7 @@ export default class Jogador {
     directionDash(vx,vy){
         if(vx != 0){
             this.dash = this.cena.physics.add.sprite(this.sprite.x, this.sprite.y, 'dash_smoke');
+            this.dash.setDepth(3);
             this.dash.setFlipX(false);
             this.dash.setFlipY(false);
             if(vx < 0){
@@ -448,7 +449,7 @@ export default class Jogador {
     }
 
     takeDamage(damage, enemy){
-       if(!enemy.enemyNoc && !this.cena.isAttacking){
+       if(!enemy.enemyNoc && !this.isDodge){
             this.healthPercentage -= damage - (this.defense / 10);
             if(this.healthPercentage <= 0){
                 this.die() ;

@@ -63,6 +63,7 @@ export default class Equip extends Phaser.Physics.Arcade.Sprite {
                     this.enableBody(true, x + offset.offset.x, y + offset.offset.y, true, true);
                     this.effect.enableBody(true, x +  (4*e_offset.x), y + e_offset.y, true, true);
                     this.effect.anims.play('effect_sword');
+                    this.effect.setDepth(1);
 
                     this.scene.tweens.add({
                         targets: this,
@@ -93,6 +94,14 @@ export default class Equip extends Phaser.Physics.Arcade.Sprite {
             this.overlap = this.scene.physics.overlap(this.effect, enemy);
             if (this.overlap && !this.scene.enemyNoc) {
                 enemy.takeDamage(this.scene.player.attack);
+                this.effect.disableBody();
+
+            }
+        });
+        this.scene.boss.getChildren().forEach(boss => {
+            this.overlap = this.scene.physics.overlap(this.effect, boss);
+            if (this.overlap && !this.scene.enemyNoc) {
+                boss.takeDamage(this.scene.player.attack);
                 this.effect.disableBody();
 
             }

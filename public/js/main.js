@@ -1,6 +1,5 @@
 import World from './world.js';
 import Carregamento from './load.js';
-
 const config = {
     type: Phaser.AUTO,
     width: 900,

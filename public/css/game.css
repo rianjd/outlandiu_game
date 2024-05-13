@@ -3,17 +3,35 @@
 
     }
     body{
-        margin: 10px 25%;
-
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background-image: url('/images/back-game.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 
+    .back-btn{
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        font-size: 30px;
+        color: rgba(255, 255, 255, 0.605);
+        transition: .2s ease;
+        padding: 10px;
+    }
+    .back-btn:hover{
+        left: 45px;
+        color: white;
+    }
 
     .gui-bar {
         position: absolute;
         height: 13px;
-        width: 94px;
+        width: 95px;
         z-index: 10;
-        top: 34px;
+        top: 77px;
 
 
     }
@@ -37,11 +55,20 @@
     }
     .pause{
         position: absolute;
-        margin-left: 750px;
+        margin-left: 850px;
         margin-top: 10px;
-
+        z-index: 99;
+        font-size: 30px;
+        color: #fff9ca91;
+        transition:.2s ease-in-out ;
+    }
+    .pause:hover{
+        color: #ffe76cdd;
     }
 
+    .pause.active{
+        color: #ffe101c4;
+    }
 
     #effect{
         position: absolute;
@@ -73,21 +100,27 @@
     }
 
     .borda-ouro {
-        background-image: linear-gradient(45deg, #ffc800 0%, #ffd363 25%, #f9dd95 25%, #ffd700 50%, #ffc400 50%, #ffcf57 75%, #fbf0b2 75%, #ffb700 100%); /* Padrão de linhas diagonais */
+        background: #654c4cb8;
         width: 900px;
         height: 700px;
-        padding: 5px
+        padding: 50px 50px 50px 50px;
+        border-radius: 20px;
+        box-shadow: 0px 0px 20px #000000;
     }
 
     #rpg{
         display: flex;
+        /* box-shadow: 0px 0px 30px #171717; */
 
     }
-
+    #gyui{
+        z-index: 11;
+        opacity: 0;
+    }
     .menu{
         position: absolute;
         margin: 50px 200px ;
-        background: #081a3bda;
+        background: #4f0035d5;
         border:3px solid #f9dd95;
         min-width: 500px;
         min-height: 600px;
@@ -102,7 +135,7 @@
 
     .menu li{
         list-style:none!important;
-        font-family: 'MedievalSharp';
+        font-family: 'Pixelify Sans';
         font-size: 50px;
         color: #ffffff;
         text-align: center;
@@ -133,7 +166,7 @@
         width: 900px;
         height: 700px;
         background: #00000049;
-        z-index: 10;
+        z-index: 9;
         opacity: 1;
     }
     .inventory{
@@ -180,7 +213,7 @@
         margin-left: 45px;
         margin-top: 45px;
         color: #ffffff;
-        font-family: 'MedievalSharp';
+        font-family: 'Pixelify Sans';
         font-size: 23px;
         font-weight: bold;
         text-shadow: -3px 3px 6px #000000;
@@ -203,7 +236,7 @@
         margin :0px 10px;
         overflow: hidden;
         color: #ffffff;
-        font-family: 'MedievalSharp';
+        font-family: 'Pixelify Sans';
         font-size: 18px;
         font-weight: bold;
         text-shadow: -3px 3px 6px #000000;
@@ -284,7 +317,7 @@
         margin-left: 45px;
         margin-top: 45px;
         color: #ffffff;
-        font-family: 'MedievalSharp';
+        font-family: 'Pixelify Sans';
         font-size: 23px;
         font-weight: bold;
         text-shadow: -3px 3px 6px #000000;
@@ -307,7 +340,7 @@
         margin :0px 10px;
         overflow: hidden;
         color: #ffffff;
-        font-family: 'MedievalSharp';
+        font-family: 'Pixelify Sans';
         font-size: 18px;
         font-weight: bold;
         text-shadow: -3px 3px 6px #000000;
@@ -369,7 +402,7 @@
 
     .item-text{
         color: #ffffff;
-        font-family: 'MedievalSharp';
+        font-family: 'Pixelify Sans';
         float: right;
         font-size: 18px;
         font-weight: bold;
@@ -400,3 +433,96 @@
     #keydown.key_show{
         opacity: 1;
     }
+
+    #loading-page{border:1px solid orange;justify-content: center;display: flex;width:900px;height: 700px;margin:0;padding:0;border:0;position:absolute;z-index: 9;}
+      #loading-bar div{
+        display:inline-block;
+        color:white;
+        font-size:4em;
+        font-family:'Oswald';
+        font-stretch:expanded;
+      }
+    #loading-bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+      #loading-bar div:nth-child(1){
+        -webkit-animation:textGlow 1400ms infinite;
+        -webkit-animation-delay:0;
+        -moz-animation:textGlow 1400ms infinite;
+        -moz-animation-delay:0;
+        -o-animation:textGlow 1400ms infinite;
+        -o-animation-delay:0;
+      }
+      #loading-bar div:nth-child(2){
+        -webkit-animation:textGlow 1400ms infinite;
+        -webkit-animation-delay:100ms;
+        -moz-animation:textGlow 1400ms infinite;
+        -moz-animation-delay:100ms;
+        -o-animation:textGlow 1400ms infinite;
+        -o-animation-delay:100ms;
+      }
+      #loading-bar div:nth-child(3){
+        -webkit-animation:textGlow 1400ms infinite;
+        -webkit-animation-delay:200ms;
+        -moz-animation:textGlow 1400ms infinite;
+        -moz-animation-delay:200ms;
+        -o-animation:textGlow 1400ms infinite;
+        -o-animation-delay:200ms;
+      }
+      #loading-bar div:nth-child(4){
+        -webkit-animation:textGlow 1400ms infinite;
+        -webkit-animation-delay:300ms;
+        -moz-animation:textGlow 1400ms infinite;
+        -moz-animation-delay:300ms;
+        -o-animation:textGlow 1400ms infinite;
+        -o-animation-delay:300ms;
+      }
+      #loading-bar div:nth-child(5){
+        -webkit-animation:textGlow 1400ms infinite;
+        -webkit-animation-delay:400ms;
+
+        -moz-animation:textGlow 1400ms infinite;
+        -moz-animation-delay:400ms;
+        -o-animation:textGlow 1400ms infinite;
+       -o-animation-delay:400ms;
+      }
+      #loading-bar div:nth-child(6){
+        -webkit-animation:textGlow 1400ms infinite;
+        -webkit-animation-delay:500ms;
+        -moz-animation:textGlow 1400ms infinite;
+        -moz-animation-delay:500ms;
+        -o-animation:textGlow 1400ms infinite;
+       -o-animation-delay:500ms;
+      }
+      #loading-bar div:nth-child(7){
+        -webkit-animation:textGlow 1400ms infinite;
+        -webkit-animation-delay:600ms;
+        -moz-animation:textGlow 1400ms infinite;
+        -moz-animation-delay:600ms;
+        -o-animation:textGlow 1400ms infinite;
+       -o-animation-delay:600ms;
+      }
+      @-webkit-keyframes textGlow{
+        0%{
+          text-shadow:0 0 0 0;
+        }
+        50%{
+          text-shadow: 0 0 20px #fff;
+        }
+        100%{
+          text-shadow:0 0 0 0;
+        }
+      }
+      @-moz-keyframes textGlow{
+        0%{
+          text-shadow:0 0 0 0;
+        }
+        50%{
+          text-shadow: 0 0 20px #fff;
+        }
+        100%{
+          text-shadow:0 0 0 0;
+        }
+      }

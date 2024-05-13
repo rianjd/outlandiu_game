@@ -8,11 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf_token" content="{{ csrf_token() }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha512-U6K1YLIFUWcvuw5ucmMtT9HH4t0uz3M366qrF5y4vnyH6dgDzndlcGvH/Lz5k8NFh80SN95aJ5rqGZEdaQZ7ZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap">
+    <script src="https://kit.fontawesome.com/5a04192bbd.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="{{URL::asset('css/game.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/easystarjs@0.4.4/bin/easystar-0.4.4.min.js"></script>
 
     <script>
-
+        const easy = new EasyStar.js();
         const playerX = {{ $playerX }};
         const playerY = {{ $playerY }};
         const playerSpecie = '{{ $player["species"] }}';
@@ -42,7 +46,9 @@
     <title>Jogo</title>
 </head>
 
-<body style="background: #161927;">
+<body >
+
+    <a href="/" class="back-btn" ><i class="fa-solid fa-arrow-left" ></i></a>
     <div class="borda-ouro">
         <div id="effect"></div>
         <div class="menu pause-menu">
@@ -123,22 +129,39 @@
 
         </div>
         <div id="rpg">
+            <div id="loading-page">
+                <div id="loading-bar">
+                  <div>L</div>
+                  <div>O</div>
+                  <div>A</div>
+                  <div>D</div>
+                  <div>I</div>
+                  <div>N</div>
+                  <div>G</div>
+                </div>
+              </div>
+
+
+
             <div class="back-menu pause-game">
             </div>
-            <img class="moldura_life" src="images/life.png" width="150" alt="">
-            <img class="pause pause-game"  src="images/gui/pause.png" alt="">
-            <div class="row">
-                <div class="gui-bar" id="food">
-                    <div id="hungryValue" class="gui-value"></div>
-                </div>
-                <div class="gui-bar" id="life">
-                    <div id="healthValue" class="gui-value"></div>
-                </div>
-                <div class="gui-bar" id="stamina">
-                    <div id="staminaValue" class="gui-value"></div>
-                </div>
-                <div class="money" id="moneyValue">
+            <div id="gyui">
 
+                <img class="moldura_life" src="images/life.png" width="150" alt="">
+                <h3 class="pause pause-game"><i class=" fa-solid fa-gear"></i></h3>
+                <div class="row">
+                    <div class="gui-bar" id="food">
+                        <div id="hungryValue" class="gui-value"></div>
+                    </div>
+                    <div class="gui-bar" id="life">
+                        <div id="healthValue" class="gui-value"></div>
+                    </div>
+                    <div class="gui-bar" id="stamina">
+                        <div id="staminaValue" class="gui-value"></div>
+                    </div>
+                    <div class="money" id="moneyValue">
+
+                    </div>
                 </div>
             </div>
             <div id="item_drop">

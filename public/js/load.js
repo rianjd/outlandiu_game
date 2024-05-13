@@ -25,6 +25,8 @@ export default class Carregamento extends Phaser.Scene{
 
         this.load.spritesheet('bear', '/assets/images/bear.png',{ frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('ogre', '/assets/images/enemies/ogre.png',{ frameWidth: 48, frameHeight: 48 });
+        this.load.spritesheet('minotaur', '/assets/images/boss/minotaur.png',{ frameWidth: 96, frameHeight: 96 });
+
         this.load.spritesheet('wolf', '/assets/images/enemies/wolf.png',{ frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('fireball', '/assets/images/fireball.png',{ frameWidth: 64, frameHeight: 24 });
         this.load.spritesheet('farmer', '/assets/images/npc/farmer.png',{ frameWidth: 32, frameHeight: 32 });
@@ -47,6 +49,8 @@ export default class Carregamento extends Phaser.Scene{
         this.load.image('lifeBarFull', '/assets/images/gui/lifeBarFull.png');
         this.load.image('lifeBarEmpty', '/assets/images/gui/lifeBarEmpty.png');
         this.load.image('lifeBarFrame', '/assets/images/gui/lifeBarFrame.png');
+        this.load.image('lifeBarlg', '/assets/images/gui/lifeBarlg.png');
+        this.load.image('lifeBarFramelg', '/assets/images/gui/lifeBarFramelg.png');
         this.load.image('background', '/assets/images/background_load.png');
         this.load.image('mask', '/assets/images/mask1.png');
 
@@ -103,15 +107,14 @@ export default class Carregamento extends Phaser.Scene{
 
         console.log("Carregando tilemap...");
 
-        let loadingText = this.add.text(this.cameras.main.width / 2, this.cameras.main.height / 2, 'Carregando...', {
-            font: '20px Arial',
-            fill: '#ffffff'
-        });
-        loadingText.setOrigin(0.5);
+        let loading = $('#loading-page')
+        let gui = $('#gyui')
+
 
         this.load.on('complete', () => {
             console.log("carregou")
-
+            loading.css('opacity','0')
+            gui.css('opacity','1')
             this.scene.start('world'); // Inicia a cena principal após o fade-out
         })
     }

@@ -61,8 +61,12 @@
                     <p>
                         The game is centered around a classic RPG, but you don't get to choose your character. You're born with a species, a power level, and a hometown, all randomly assigned. As you explore the world, you'll encounter other species, cities, and abilities. You're completely free - live your Roleplay in whatever way you wish.
                     </p>
+                    @if (!Auth::check())
+                        <button class="btn " data-bs-toggle="modal" data-bs-target="#modalLogin" type="button" >JOGAR<i class="fa fa-play " style="margin-left: 1em;"></i></button>
 
-                    <button class="btn " data-bs-toggle="modal" data-bs-target="#modalLogin" type="button" >JOGAR<i class="fa fa-play " style="margin-left: 1em;"></i></button>
+                    @else
+                        <a class="btn " href="/game"  type="button" >JOGAR<i class="fa fa-play " style="margin-left: 1em;"></i></a>
+                    @endif
                 </div>
                 <div class="col text-right" >
                     <img  src="images/imagem-site.jpeg" width="500" alt="">

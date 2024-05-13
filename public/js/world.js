@@ -6,9 +6,11 @@ import Fireball from "./fireball.js";
 import CollectableItem from "./item_drop.js";
 import Equip from "./equip.js";
 import Npc from "./npc.js";
+import Boss from "./boss.js";
 import Farmer from "./npc/farmer.js";
 import Fisherman from "./npc/fisherman.js";
 import Nomade from "./npc/nomade.js";
+import Minotaur from "./bosses/minotaur.js";
 
 export default class World extends Phaser.Scene {
     constructor() {
@@ -26,7 +28,7 @@ export default class World extends Phaser.Scene {
         this.wait = false;
         this.canFarm = true;
         this.isDay = true;
-
+        this.finder = easy;
     }
 
     create() {
@@ -99,7 +101,6 @@ export default class World extends Phaser.Scene {
         //const npcLayer = map.createDynamicLayer('Npc Things', [tile_grass, tileset],0 ,0 );
         const obstaclesLayer = map.createStaticLayer('Tile Layer 2', [tileset, tile_grass, tree, house, tiletree, snow_houses]);
         this.obstaclesLayer = obstaclesLayer;
-
         const decorLayer = map.createStaticLayer('Extra', [tileset, tile_grass, snow_houses]);
         const floorLayer = map.createStaticLayer('Floor Thing', [tileset, tile_grass, tree,  house, terrain, tiletree, snow_houses]);
         this.treeLayer = map.createStaticLayer('Tree Layer', [tree, tiletree]);
@@ -110,6 +111,8 @@ export default class World extends Phaser.Scene {
         groundLayer.setCollisionByProperty({ collides: true });
         floorLayer.setCollisionByProperty({ collides: true });
         this.treeLayer.setCollisionByProperty({ collides: true });
+        this.map = map;
+
 
         // Redimensione o tamanho da tela do jogo para corresponder ao tamanho do mapa redimensionado
         this.cameras.main.setBounds(0, 0, 8000 , 8000);
@@ -123,9 +126,11 @@ export default class World extends Phaser.Scene {
 
         const npcLayerWork = map.getObjectLayer('Trabalho');
         const npcLayerSpawn = map.getObjectLayer('Spawn');
+        const bossLayerSpawn = map.getObjectLayer('Boss');
 
         const npcSpawn = npcLayerSpawn.objects.filter(objeto => objeto.type === 'spawn');
         const npcWorks = npcLayerWork.objects.filter(objeto => objeto.type === 'work');
+        const bossSpawn = bossLayerSpawn.objects.filter(objeto => objeto.type === 'spawn');
 
         npcWorks.forEach(obj => {
             let sprite;
@@ -157,15 +162,23 @@ export default class World extends Phaser.Scene {
             this.things.add(thing)
         });
 
-
+        this.boss = this.physics.add.group();
         this.enemies = this.physics.add.group();
 
         this.ogre  = new Ogre(this, 'ogre');
         this.wolf  = new Wolf(this, 'wolf');
-
+        this.minotaur  = new Minotaur(this, 'minotaur');
         this.enemies.add(new Enemies(this, 1020, 400, 'ogre'));
 
-
+        bossSpawn.forEach(obj => {
+            const boss = new Boss(this, obj.x, obj.y, obj.name);
+            boss.mainSpawn = {x: obj.x, y: obj.y, 'name': obj.name};
+            const thing = this.add.rectangle(obj.x +obj.width/2 , obj.y + obj.height/2, obj.width, obj.height, 0x000000, 0);
+            thing.boss = boss;
+            thing.name = obj.name;
+            this.boss.add(boss);
+            this.things.add(thing)
+        });
 
         floorLayer.depth = 2;
         this.player.sprite.depth = 3;
@@ -188,6 +201,11 @@ export default class World extends Phaser.Scene {
         this.physics.add.collider(this.enemies, floorLayer);
         this.physics.add.collider(this.enemies, obstaclesLayer);
         this.physics.add.collider(this.enemies, this.treeLayer);
+
+        this.physics.add.collider(this.boss, groundLayer);
+        this.physics.add.collider(this.boss, floorLayer);
+        this.physics.add.collider(this.boss, obstaclesLayer);
+        this.physics.add.collider(this.boss, this.treeLayer);
 
         this.physics.add.collider(this.npc, groundLayer);
         this.physics.add.collider(this.npc, floorLayer);
@@ -350,7 +368,36 @@ export default class World extends Phaser.Scene {
         });
         this.rt.setAlpha(0);
 
-    }
+        var grid = [];
+        var indexTile = 0;
+        for(var y = 0; y < map.height; y++){
+            var col = [];
+            for(var x = 0; x < map.width; x++){
+                var tile = obstaclesLayer.getTileAt(x, y)
+                if(tile != null){
+                    if(tile.properties)
+                    indexTile =  tile.index;
+                    col.push(indexTile)
+                }else{
+                    col.push(0)
+                }
+            }
+            grid.push(col);
+        }
+        this.finder.setGrid(grid)
+        this.finder.setAcceptableTiles([0]);
+
+        this.finder.findPath(0, 20, 0, 13, function( path ) {
+                if (path === null) {
+                    console.warn("Path was not found.");
+                } else {
+                    console.log(path);
+                    //Game.moveCharacter(path);
+                }
+            });
+        this.finder.calculate();
+}
+
     regenerarArvores(arvore) {
         arvore.play('corteArvore');
         this.time.delayedCall(800, () => {
@@ -368,6 +415,10 @@ export default class World extends Phaser.Scene {
         // Atualize todos os inimigos na cena
         this.enemies.getChildren().forEach(enemies => {
             enemies.update();
+        });
+
+        this.boss.getChildren().forEach(bosses => {
+            bosses.update();
         });
 
         this.npc.getChildren().forEach(npc => {
